@@ -1,14 +1,6 @@
-FROM node:lts-alpine
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install -g pm2
-RUN npm ci --only=production
-
-COPY . .
-
-RUN chmod +x start.sh
-
-CMD ["./start.sh"]
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY public/ /usr/share/nginx/html/
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]

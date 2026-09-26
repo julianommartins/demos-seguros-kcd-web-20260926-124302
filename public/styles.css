@@ -1,0 +1,100 @@
+:root {
+  --primary: #003399;
+  --secondary: #FFFFFF;
+  --on-primary: #ffffff;
+  --primary-soft: color-mix(in srgb, var(--primary) 12%, var(--surface));
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --text: #1a1d29;
+  --muted: #5b6275;
+  --border: #dde2ee;
+  --danger: #c62828;
+  --ok: #2e7d32;
+  --shadow: 0 2px 8px rgba(16, 24, 64, .08);
+  --emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1320;
+    --surface: #1a2033;
+    --text: #e8ebf5;
+    --muted: #a2a9bf;
+    --border: #2c3450;
+    --shadow: 0 2px 8px rgba(0, 0, 0, .4);
+    --primary-soft: color-mix(in srgb, var(--primary) 35%, var(--surface));
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column;
+}
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.topo { background: var(--primary); color: var(--on-primary); border-bottom: 4px solid var(--secondary); }
+.topo-conteudo { max-width: 1200px; margin: 0 auto; padding: 20px 16px; display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.marca { display: flex; gap: 12px; align-items: center; }
+.marca-icone { font-size: 2.2rem; font-family: var(--emoji); }
+.marca h1 { margin: 0; font-size: 1.6rem; }
+.subtitulo { margin: 2px 0 0; opacity: .85; }
+.status { display: flex; gap: 8px; align-items: center; font-size: .9rem; background: rgba(255,255,255,.14); padding: 6px 12px; border-radius: 999px; }
+.status-ponto { width: 10px; height: 10px; border-radius: 50%; background: #bbb; }
+.status.online .status-ponto { background: #4caf50; }
+.status.offline .status-ponto { background: #f44336; }
+
+.conteudo { max-width: 1200px; width: 100%; margin: 0 auto; padding: 24px 16px; flex: 1; }
+.barra { display: flex; gap: 12px; flex-wrap: wrap; }
+.busca { flex: 1; min-width: 200px; }
+.busca input, .modal input, .modal textarea {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface); color: var(--text); font: inherit;
+}
+.busca input:focus, .modal input:focus, .modal textarea:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+.botao { padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+.botao-primario { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.botao-perigo { background: var(--danger); color: #fff; border-color: var(--danger); }
+.botao:hover { filter: brightness(1.08); }
+
+.categorias { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 8px; }
+.pilula { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; font: inherit; font-size: .9rem; }
+.pilula.ativa { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.contador { color: var(--muted); font-size: .9rem; margin: 8px 0 16px; }
+
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+@media (max-width: 400px) { .grade { grid-template-columns: 1fr; } }
+.cartao { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+.cartao-imagem { background: var(--primary-soft); font-size: 3.5rem; text-align: center; padding: 22px 0; font-family: var(--emoji); }
+.cartao-corpo { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.cartao h3 { margin: 0; font-size: 1.1rem; }
+.cartao .categoria { align-self: flex-start; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--primary); background: var(--primary-soft); padding: 3px 8px; border-radius: 6px; }
+@media (prefers-color-scheme: dark) { .cartao .categoria { color: var(--text); } }
+.cartao .descricao { color: var(--muted); font-size: .9rem; margin: 0; }
+.cartao .cobertura { font-size: .85rem; margin: 0; }
+.cartao .valor { font-size: 1.3rem; font-weight: 700; margin: auto 0 0; }
+.cartao .valor small { font-size: .8rem; font-weight: 400; color: var(--muted); }
+.cartao-acoes { display: flex; gap: 8px; padding: 0 16px 14px; }
+.cartao-acoes .botao { flex: 1; padding: 8px; font-size: .9rem; }
+.vazio { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 0; }
+
+.modal { border: none; border-radius: 14px; padding: 24px; width: min(560px, calc(100vw - 32px)); background: var(--surface); color: var(--text); box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+.modal::backdrop { background: rgba(10, 15, 35, .55); }
+.modal-pequeno { width: min(420px, calc(100vw - 32px)); }
+.modal h2 { margin-top: 0; }
+.modal form { display: flex; flex-direction: column; gap: 12px; }
+.modal label, .campo { display: flex; flex-direction: column; gap: 6px; font-size: .9rem; font-weight: 600; }
+.linha { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 480px) { .linha { grid-template-columns: 1fr; } }
+.emojis { display: flex; flex-wrap: wrap; gap: 6px; }
+.emojis button { font-size: 1.4rem; font-family: var(--emoji); width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; }
+.emojis button.selecionado { border: 2px solid var(--primary); background: var(--primary-soft); }
+.acoes { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+.erro-form { color: var(--danger); margin: 0; min-height: 1em; font-size: .9rem; }
+
+.rodape { text-align: center; padding: 20px 16px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); }
+.rodape p { margin: 4px 0; }
+
+.toasts { position: fixed; bottom: 16px; right: 16px; left: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none; }
+.toast { background: var(--ok); color: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: var(--shadow); max-width: 360px; pointer-events: auto; animation: entra .2s ease-out; }
+.toast.erro { background: var(--danger); }
+@keyframes entra { from { transform: translateY(10px); opacity: 0; } }
